@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.*;
+import java.util.regex.*;
 
 public class Principal {
     private static Scanner scanner = new Scanner(System.in);
@@ -31,10 +32,10 @@ public class Principal {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Erro: Digite um número válido.");
-                scanner.nextLine(); // Limpa o buffer para evitar loops infinitos
+                scanner.nextLine();
             } catch (Exception e) {
                 System.out.println("Erro inesperado: " + e.getMessage());
-                scanner.nextLine(); // Limpa o buffer
+                scanner.nextLine();
             }
         }
     }
@@ -55,15 +56,37 @@ public class Principal {
                     case 1 -> {
                         System.out.print("Título: ");
                         String titulo = scanner.nextLine();
+                        if (titulo.trim().isEmpty()) {
+                            throw new IllegalArgumentException("Título não pode ser vazio.");
+                        }
+
                         System.out.print("Autor: ");
                         String autor = scanner.nextLine();
+                        if (autor.trim().isEmpty()) {
+                            throw new IllegalArgumentException("Autor não pode ser vazio.");
+                        } else if (!autor.matches("[a-zA-Z\\s]+")) {
+                            throw new IllegalArgumentException("Autor deve conter apenas letras e espaços.");
+                        }
+
                         System.out.print("ISBN: ");
                         String isbn = scanner.nextLine();
+                        if (isbn.trim().isEmpty()) {
+                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
+                        } else if (!isbn.matches("\\d+")) {
+                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        }
+
                         biblioteca.adicionarLivro(new Livro(titulo, autor, isbn));
                     }
                     case 2 -> {
                         System.out.print("ISBN do livro para remover: ");
-                        biblioteca.removerLivro(scanner.nextLine());
+                        String isbn = scanner.nextLine();
+                        if (isbn.trim().isEmpty()) {
+                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
+                        } else if (!isbn.matches("\\d+")) {
+                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        }
+                        biblioteca.removerLivro(isbn);
                     }
                     case 3 -> biblioteca.listarLivros();
                     case 4 -> { return; }
@@ -72,6 +95,8 @@ public class Principal {
             } catch (InputMismatchException e) {
                 System.out.println("Erro: Digite um número válido.");
                 scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("Erro inesperado: " + e.getMessage());
                 scanner.nextLine();
@@ -94,6 +119,11 @@ public class Principal {
                     case 1 -> {
                         System.out.print("Nome: ");
                         String nome = scanner.nextLine();
+                        if (nome.trim().isEmpty()) {
+                            throw new IllegalArgumentException("Nome não pode ser vazio.");
+                        } else if (!nome.matches("[a-zA-Z\\s]+")) {
+                            throw new IllegalArgumentException("Nome deve conter apenas letras e espaços.");
+                        }
 
                         System.out.print("ID: ");
                         int id = scanner.nextInt();
@@ -106,6 +136,11 @@ public class Principal {
 
                         System.out.print("Email: ");
                         String email = scanner.nextLine();
+                        if (email.trim().isEmpty()) {
+                            throw new IllegalArgumentException("Email não pode ser vazio.");
+                        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+                            throw new IllegalArgumentException("Email inválido.");
+                        }
 
                         biblioteca.registrarMembro(new Membro(nome, id, email));
                     }
@@ -116,6 +151,8 @@ public class Principal {
             } catch (InputMismatchException e) {
                 System.out.println("Erro: Digite um número válido.");
                 scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("Erro inesperado: " + e.getMessage());
                 scanner.nextLine();
@@ -139,6 +176,12 @@ public class Principal {
                     case 1 -> {
                         System.out.print("ISBN do Livro: ");
                         String isbn = scanner.nextLine();
+                        if (isbn.trim().isEmpty()) {
+                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
+                        } else if (!isbn.matches("\\d+")) {
+                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        }
+
                         System.out.print("ID do Membro: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
@@ -147,6 +190,12 @@ public class Principal {
                     case 2 -> {
                         System.out.print("ISBN do Livro: ");
                         String isbn = scanner.nextLine();
+                        if (isbn.trim().isEmpty()) {
+                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
+                        } else if (!isbn.matches("\\d+")) {
+                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        }
+
                         System.out.print("ID do Membro: ");
                         int id = scanner.nextInt();
                         scanner.nextLine();
@@ -159,6 +208,8 @@ public class Principal {
             } catch (InputMismatchException e) {
                 System.out.println("Erro: Digite um número válido.");
                 scanner.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("Erro inesperado: " + e.getMessage());
                 scanner.nextLine();
