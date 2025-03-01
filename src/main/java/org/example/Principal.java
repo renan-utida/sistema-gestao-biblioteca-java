@@ -1,11 +1,13 @@
 package org.example;
 
 import java.util.*;
-import java.util.regex.*;
 
 public class Principal {
     private static Scanner scanner = new Scanner(System.in);
     private static Biblioteca biblioteca = new Biblioteca();
+    private static GerenciarLivros gerenciarLivros = new GerenciarLivros(biblioteca);
+    private static GerenciarMembros gerenciarMembros = new GerenciarMembros(biblioteca);
+    private static GerenciarEmprestimos gerenciarEmprestimos = new GerenciarEmprestimos(biblioteca);
 
     public static void main(String[] args) {
         System.out.println("Seja bem-vindo ao sistema de gestão de biblioteca!");
@@ -42,7 +44,7 @@ public class Principal {
 
     private static void gerenciarLivros() {
         while (true) {
-            try {
+            try{
                 System.out.println("\n1 - Adicionar Livro");
                 System.out.println("2 - Remover Livro");
                 System.out.println("3 - Listar Livros");
@@ -53,43 +55,9 @@ public class Principal {
                 scanner.nextLine();
 
                 switch (opcao) {
-                    case 1 -> {
-                        System.out.print("Título: ");
-                        String titulo = scanner.nextLine();
-                        if (titulo.trim().isEmpty()) {
-                            throw new IllegalArgumentException("Título não pode ser vazio.");
-                        }
-
-                        System.out.print("Autor: ");
-                        String autor = scanner.nextLine();
-                        if (autor.trim().isEmpty()) {
-                            throw new IllegalArgumentException("Autor não pode ser vazio.");
-                        } else if (!autor.matches("[a-zA-Z\\s]+")) {
-                            throw new IllegalArgumentException("Autor deve conter apenas letras e espaços.");
-                        }
-
-                        System.out.print("ISBN: ");
-                        int isbn = scanner.nextInt();
-                        scanner.nextLine();
-
-                        if (biblioteca.existeLivro(isbn)) {
-                            System.out.println("Erro: Já existe um livro com esse ISBN.");
-                            continue;
-                        }
-
-                        biblioteca.adicionarLivro(new Livro(titulo, autor, isbn));
-                    }
-                    case 2 -> {
-                        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "Nenhum livro registrado no sistema.")) {
-                            return;
-                        }
-
-                        System.out.print("ISBN do livro para remover: ");
-                        int isbn = scanner.nextInt();
-                        scanner.nextLine();
-                        biblioteca.removerLivro(isbn);
-                    }
-                    case 3 -> biblioteca.listarLivros();
+                    case 1 -> gerenciarLivros.adicionarLivro();
+                    case 2 -> gerenciarLivros.removerLivro();
+                    case 3 -> gerenciarLivros.listarLivros();
                     case 4 -> { return; }
                     default -> System.out.println("Opção inválida! Digite um número de 1 a 4.");
                 }
@@ -107,7 +75,7 @@ public class Principal {
 
     private static void gerenciarMembros() {
         while (true) {
-            try {
+            try{
                 System.out.println("\n1 - Registrar Membro");
                 System.out.println("2 - Listar Membros");
                 System.out.println("3 - Voltar");
@@ -117,35 +85,8 @@ public class Principal {
                 scanner.nextLine();
 
                 switch (opcao) {
-                    case 1 -> {
-                        System.out.print("Nome: ");
-                        String nome = scanner.nextLine();
-                        if (nome.trim().isEmpty()) {
-                            throw new IllegalArgumentException("Nome não pode ser vazio.");
-                        } else if (!nome.matches("[a-zA-Z\\s]+")) {
-                            throw new IllegalArgumentException("Nome deve conter apenas letras e espaços.");
-                        }
-
-                        System.out.print("ID: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine();
-
-                        if (biblioteca.existeMembro(id)) {
-                            System.out.println("Erro: Já existe um membro com esse ID.");
-                            continue;
-                        }
-
-                        System.out.print("Email: ");
-                        String email = scanner.nextLine();
-                        if (email.trim().isEmpty()) {
-                            throw new IllegalArgumentException("Email não pode ser vazio.");
-                        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-                            throw new IllegalArgumentException("Email inválido.");
-                        }
-
-                        biblioteca.registrarMembro(new Membro(nome, id, email));
-                    }
-                    case 2 -> biblioteca.listarMembros();
+                    case 1 -> gerenciarMembros.registrarMembro();
+                    case 2 -> gerenciarMembros.listarMembros();
                     case 3 -> { return; }
                     default -> System.out.println("Opção inválida! Digite um número de 1 a 3.");
                 }
@@ -163,7 +104,7 @@ public class Principal {
 
     private static void gerenciarEmprestimos() {
         while (true) {
-            try {
+            try{
                 System.out.println("\n1 - Registrar Empréstimo");
                 System.out.println("2 - Devolver Livro");
                 System.out.println("3 - Listar Empréstimos");
@@ -174,36 +115,9 @@ public class Principal {
                 scanner.nextLine();
 
                 switch (opcao) {
-                    case 1 -> {
-                        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "Nenhum livro registrado no sistema.") ||
-                                biblioteca.exibirMensagemSeListaVazia(biblioteca.getMembros(), "Nenhum membro registrado no sistema.")) {
-                            return;
-                        }
-
-                        System.out.print("ISBN do Livro: ");
-                        int isbn = scanner.nextInt();
-                        scanner.nextLine();
-
-                        System.out.print("ID do Membro: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine();
-                        biblioteca.registrarEmprestimo(isbn, id);
-                    }
-                    case 2 -> {
-                        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getEmprestimos(), "Nenhum empréstimo registrado no sistema.")) {
-                            return;
-                        }
-
-                        System.out.print("ISBN do Livro: ");
-                        int isbn = scanner.nextInt();
-                        scanner.nextLine();
-
-                        System.out.print("ID do Membro: ");
-                        int id = scanner.nextInt();
-                        scanner.nextLine();
-                        biblioteca.devolverLivro(isbn, id);
-                    }
-                    case 3 -> biblioteca.listarEmprestimos();
+                    case 1 -> gerenciarEmprestimos.registrarEmprestimo();
+                    case 2 -> gerenciarEmprestimos.devolverLivro();
+                    case 3 -> gerenciarEmprestimos.listarEmprestimos();
                     case 4 -> { return; }
                     default -> System.out.println("Opção inválida! Digite um número de 1 a 4.");
                 }

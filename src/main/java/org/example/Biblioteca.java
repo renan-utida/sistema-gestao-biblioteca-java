@@ -23,7 +23,7 @@ public class Biblioteca {
         carregarDados(); // Carregar dados ao iniciar
     }
 
-    public void adicionarLivro(Livro livro) {
+    public void novoLivro(Livro livro) {
         for (Livro l : livros) {
             if (l.getIsbn() == livro.getIsbn()) {
                 System.out.println("Erro: Já existe um livro com esse ISBN.");
@@ -35,7 +35,7 @@ public class Biblioteca {
         System.out.println("Livro adicionado com sucesso!");
     }
 
-    public void removerLivro(int isbn) {
+    public void remocaoLivro(int isbn) {
         if (livros.isEmpty()) {
             System.out.println("Nenhum livro cadastrado no sistema.");
             return;
@@ -50,7 +50,13 @@ public class Biblioteca {
         }
     }
 
-    public void registrarMembro(Membro membro) {
+    public void listagemLivros() {
+        if (exibirMensagemSeListaVazia(livros, "Nenhum livro cadastrado.")) return;
+        livros.forEach(System.out::println);
+    }
+
+
+    public void registroMembro(Membro membro) {
         for (Membro m : membros) {
             if (m.getId() == membro.getId()) {
                 System.out.println("Erro: Já existe um membro com esse ID.");
@@ -62,15 +68,13 @@ public class Biblioteca {
         System.out.println("Membro registrado com sucesso!");
     }
 
-    public boolean existeLivro(int isbn) {
-        return livros.stream().anyMatch(m -> m.getIsbn() == isbn);
+    public void listagemMembros() {
+        if (exibirMensagemSeListaVazia(membros, "Nenhum membro cadastrado.")) return;
+        membros.forEach(System.out::println);
     }
 
-    public boolean existeMembro(int id) {
-        return membros.stream().anyMatch(m -> m.getId() == id);
-    }
 
-    public void registrarEmprestimo(int isbn, int membroId) {
+    public void registroEmprestimo(int isbn, int membroId) {
         Livro livro = livros.stream().filter(l -> l.getIsbn() == isbn).findFirst().orElse(null);
         Membro membro = membros.stream().filter(m -> m.getId() == membroId).findFirst().orElse(null);
 
@@ -83,7 +87,7 @@ public class Biblioteca {
         }
     }
 
-    public void devolverLivro(int isbn, int membroId) {
+    public void devolucaoLivro(int isbn, int membroId) {
         if (emprestimos.isEmpty()) {
             System.out.println("Nenhum empréstimo registrado no sistema.");
             return;
@@ -102,19 +106,18 @@ public class Biblioteca {
         }
     }
 
-    public void listarLivros() {
-        if (exibirMensagemSeListaVazia(livros, "Nenhum livro cadastrado.")) return;
-        livros.forEach(System.out::println);
-    }
-
-    public void listarMembros() {
-        if (exibirMensagemSeListaVazia(membros, "Nenhum membro cadastrado.")) return;
-        membros.forEach(System.out::println);
-    }
-
-    public void listarEmprestimos() {
+    public void listagemEmprestimos() {
         if (exibirMensagemSeListaVazia(emprestimos, "Nenhum empréstimo registrado.")) return;
         emprestimos.forEach(System.out::println);
+    }
+
+
+    public boolean existeLivro(int isbn) {
+        return livros.stream().anyMatch(m -> m.getIsbn() == isbn);
+    }
+
+    public boolean existeMembro(int id) {
+        return membros.stream().anyMatch(m -> m.getId() == id);
     }
 
     public <T> boolean exibirMensagemSeListaVazia(List<T> lista, String mensagem) {

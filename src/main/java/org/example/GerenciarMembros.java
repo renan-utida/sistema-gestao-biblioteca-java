@@ -1,0 +1,46 @@
+package org.example;
+
+import java.util.Scanner;
+
+public class GerenciarMembros {
+    private Biblioteca biblioteca;
+
+    public GerenciarMembros(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
+    public void registrarMembro() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        if (nome.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome não pode ser vazio.");
+        } else if (!nome.matches("[a-zA-Z\\s]+")) {
+            throw new IllegalArgumentException("Nome deve conter apenas letras e espaços.");
+        }
+
+        System.out.print("ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        if (biblioteca.existeMembro(id)) {
+            System.out.println("Erro: Já existe um membro com esse ID.");
+            return;
+        }
+
+        System.out.print("Email: ");
+        String email = scanner.nextLine();
+        if (email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email não pode ser vazio.");
+        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+            throw new IllegalArgumentException("Email inválido.");
+        }
+
+        Membro membro = new Membro(nome, id, email);
+        biblioteca.registroMembro(membro);
+    }
+
+    public void listarMembros() {
+        biblioteca.listagemMembros();
+    }
+}
