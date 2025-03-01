@@ -1,0 +1,10 @@
+Livro: {titulo=Auto da Compadecida, autor=Marlon, ISBN=321}
+Livro: {titulo=A busca dos perdidos, autor=Jorge, ISBN=456}
+Livro: {titulo=Titanic, autor=Paul Walker, ISBN=123}
+Livro: {titulo=1, autor=1, ISBN=1}
+Membro: {nome=Prince, id=852, email=prince@email.com}
+Membro: {nome=Lucas, id=258, email=luqueta@email.com}
+Membro: {nome=Lorran, id=741, email=lorran@ldao}
+Membro: {nome=1, id=1, email=1}
+Membro: {nome=Walter, id=356, email=was}
+Emprestimo: {livro=A busca dos perdidos, membro=Lorran, data=Fri Feb 28 23:14:31 GMT-03:00 2025}
