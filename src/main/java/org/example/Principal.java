@@ -69,23 +69,24 @@ public class Principal {
                         }
 
                         System.out.print("ISBN: ");
-                        String isbn = scanner.nextLine();
-                        if (isbn.trim().isEmpty()) {
-                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
-                        } else if (!isbn.matches("\\d+")) {
-                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        int isbn = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (biblioteca.existeLivro(isbn)) {
+                            System.out.println("Erro: Já existe um livro com esse ISBN.");
+                            continue;
                         }
 
                         biblioteca.adicionarLivro(new Livro(titulo, autor, isbn));
                     }
                     case 2 -> {
-                        System.out.print("ISBN do livro para remover: ");
-                        String isbn = scanner.nextLine();
-                        if (isbn.trim().isEmpty()) {
-                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
-                        } else if (!isbn.matches("\\d+")) {
-                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "Nenhum livro registrado no sistema.")) {
+                            return;
                         }
+
+                        System.out.print("ISBN do livro para remover: ");
+                        int isbn = scanner.nextInt();
+                        scanner.nextLine();
                         biblioteca.removerLivro(isbn);
                     }
                     case 3 -> biblioteca.listarLivros();
@@ -174,13 +175,14 @@ public class Principal {
 
                 switch (opcao) {
                     case 1 -> {
-                        System.out.print("ISBN do Livro: ");
-                        String isbn = scanner.nextLine();
-                        if (isbn.trim().isEmpty()) {
-                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
-                        } else if (!isbn.matches("\\d+")) {
-                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "Nenhum livro registrado no sistema.") ||
+                                biblioteca.exibirMensagemSeListaVazia(biblioteca.getMembros(), "Nenhum membro registrado no sistema.")) {
+                            return;
                         }
+
+                        System.out.print("ISBN do Livro: ");
+                        int isbn = scanner.nextInt();
+                        scanner.nextLine();
 
                         System.out.print("ID do Membro: ");
                         int id = scanner.nextInt();
@@ -188,13 +190,13 @@ public class Principal {
                         biblioteca.registrarEmprestimo(isbn, id);
                     }
                     case 2 -> {
-                        System.out.print("ISBN do Livro: ");
-                        String isbn = scanner.nextLine();
-                        if (isbn.trim().isEmpty()) {
-                            throw new IllegalArgumentException("ISBN não pode ser vazio.");
-                        } else if (!isbn.matches("\\d+")) {
-                            throw new IllegalArgumentException("ISBN deve conter apenas números.");
+                        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getEmprestimos(), "Nenhum empréstimo registrado no sistema.")) {
+                            return;
                         }
+
+                        System.out.print("ISBN do Livro: ");
+                        int isbn = scanner.nextInt();
+                        scanner.nextLine();
 
                         System.out.print("ID do Membro: ");
                         int id = scanner.nextInt();

@@ -3,24 +3,32 @@ package org.example;
 public class Livro {
     private String titulo;
     private String autor;
-    private String ISBN;
+    private int isbn;
 
-    public Livro(String titulo, String autor, String ISBN) {
+    public Livro(String titulo, String autor, int isbn) {
         this.titulo = titulo;
         this.autor = autor;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
     }
 
-    public String getTitulo() { return titulo; }
-    public String getAutor() { return autor; }
-    public String getISBN() { return ISBN; }
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public int getIsbn() {
+        return isbn;
+    }
 
     @Override
     public String toString() {
         return "Livro{" +
                 "titulo='" + titulo + '\'' +
                 ", autor='" + autor + '\'' +
-                ", ISBN='" + ISBN + '\'' +
+                ", ISBN='" + isbn + '\'' +
                 '}';
     }
 }

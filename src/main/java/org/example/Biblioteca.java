@@ -9,13 +9,23 @@ public class Biblioteca {
     private List<Emprestimo> emprestimos = new ArrayList<>();
     private static final String ARQUIVO = "biblioteca.txt";
 
+    public List<Livro> getLivros() {
+        return livros;
+    }
+    public List<Membro> getMembros() {
+        return membros;
+    }
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
     public Biblioteca() {
         carregarDados(); // Carregar dados ao iniciar
     }
 
     public void adicionarLivro(Livro livro) {
         for (Livro l : livros) {
-            if (l.getISBN().equals(livro.getISBN())) {
+            if (l.getIsbn() == livro.getIsbn()) {
                 System.out.println("Erro: Já existe um livro com esse ISBN.");
                 return;
             }
@@ -25,13 +35,18 @@ public class Biblioteca {
         System.out.println("Livro adicionado com sucesso!");
     }
 
-    public void removerLivro(String isbn) {
-        boolean removido = livros.removeIf(l -> l.getISBN().equals(isbn));
+    public void removerLivro(int isbn) {
+        if (livros.isEmpty()) {
+            System.out.println("Nenhum livro cadastrado no sistema.");
+            return;
+        }
+
+        boolean removido = livros.removeIf(l -> l.getIsbn() == isbn);
         if (removido) {
             salvarDados();
             System.out.println("Livro removido com sucesso!");
         } else {
-            System.out.println("Erro: Livro não encontrado.");
+            System.out.println("Erro: Livro com ISBN " + isbn + " não encontrado.");
         }
     }
 
@@ -47,12 +62,16 @@ public class Biblioteca {
         System.out.println("Membro registrado com sucesso!");
     }
 
+    public boolean existeLivro(int isbn) {
+        return livros.stream().anyMatch(m -> m.getIsbn() == isbn);
+    }
+
     public boolean existeMembro(int id) {
         return membros.stream().anyMatch(m -> m.getId() == id);
     }
 
-    public void registrarEmprestimo(String isbn, int membroId) {
-        Livro livro = livros.stream().filter(l -> l.getISBN().equals(isbn)).findFirst().orElse(null);
+    public void registrarEmprestimo(int isbn, int membroId) {
+        Livro livro = livros.stream().filter(l -> l.getIsbn() == isbn).findFirst().orElse(null);
         Membro membro = membros.stream().filter(m -> m.getId() == membroId).findFirst().orElse(null);
 
         if (livro != null && membro != null) {
@@ -64,9 +83,14 @@ public class Biblioteca {
         }
     }
 
-    public void devolverLivro(String isbn, int membroId) {
+    public void devolverLivro(int isbn, int membroId) {
+        if (emprestimos.isEmpty()) {
+            System.out.println("Nenhum empréstimo registrado no sistema.");
+            return;
+        }
+
         Optional<Emprestimo> emprestimo = emprestimos.stream()
-                .filter(e -> e.getLivro().getISBN().equals(isbn) && e.getMembro().getId() == membroId)
+                .filter(e -> e.getLivro().getIsbn() == isbn && e.getMembro().getId() == membroId)
                 .findFirst();
 
         if (emprestimo.isPresent()) {
@@ -93,7 +117,7 @@ public class Biblioteca {
         emprestimos.forEach(System.out::println);
     }
 
-    private <T> boolean exibirMensagemSeListaVazia(List<T> lista, String mensagem) {
+    public <T> boolean exibirMensagemSeListaVazia(List<T> lista, String mensagem) {
         if (lista.isEmpty()) {
             System.out.println(mensagem);
             return true;
@@ -104,7 +128,7 @@ public class Biblioteca {
     private void salvarDados() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO, false))) {
             for (Livro livro : livros) {
-                writer.write("Livro: {titulo=" + livro.getTitulo() + ", autor=" + livro.getAutor() + ", ISBN=" + livro.getISBN() + "}");
+                writer.write("Livro: {titulo=" + livro.getTitulo() + ", autor=" + livro.getAutor() + ", ISBN=" + livro.getIsbn() + "}");
                 writer.newLine();
             }
             for (Membro membro : membros) {
@@ -128,7 +152,7 @@ public class Biblioteca {
                     String[] partes = linha.substring(6).split(", ");
                     String titulo = partes[0].split("=")[1];
                     String autor = partes[1].split("=")[1];
-                    String isbn = partes[2].split("=")[1].replace("}", "");
+                    int isbn = Integer.parseInt(partes[2].split("=")[1].replace("}", ""));
                     livros.add(new Livro(titulo, autor, isbn));
                 } else if (linha.startsWith("Membro:")) {
                     String[] partes = linha.substring(7).split(", ");
