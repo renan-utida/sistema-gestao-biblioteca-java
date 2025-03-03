@@ -11,21 +11,21 @@ Este é um sistema de gestão de biblioteca desenvolvido em Java como parte de u
 O sistema oferece as seguintes funcionalidades:
 
 1. **Gerenciamento de Livros:**
-- Adicionar um novo livro.
-- Remover um livro existente.
-- Listar todos os livros cadastrados.
+   - Adicionar um novo livro.
+   - Remover um livro existente.
+   - Listar todos os livros cadastrados.
 
 2. **Gerenciamento de Membros:**
-- Registrar um novo membro.
-- Listar todos os membros cadastrados.
+   - Registrar um novo membro.
+   - Listar todos os membros cadastrados.
 
 3. **Gerenciamento de Empréstimos:**
-- Registrar um empréstimo de livro para um membro.
-- Devolver um livro emprestado.
-- Listar todos os empréstimos ativos.
+   - Registrar um empréstimo de livro para um membro.
+   - Devolver um livro emprestado.
+   - Listar todos os empréstimos ativos.
 
 4. **Persistência de Dados:**
-- Os dados são salvos em um arquivo `biblioteca.txt` e carregados automaticamente ao iniciar o sistema.
+   - Os dados são salvos em um arquivo `biblioteca.txt` e carregados automaticamente ao iniciar o sistema.
 
 ## Estrutura do Projeto
 
