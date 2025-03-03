@@ -3,7 +3,6 @@
 Este é um sistema de gestão de biblioteca desenvolvido em Java como parte de um exercício prático. O sistema permite gerenciar livros, membros e empréstimos de uma biblioteca, seguindo boas práticas de programação e utilizando conceitos como classes, atributos, métodos, listas, tratamento de exceções e manipulação de arquivos.
 
 ## Tecnologia Utilizada
-- Java
 
 <img src="https://github.com/user-attachments/assets/fc2e0fc7-e5d9-40a9-8681-9f0c09c23705" alt="java-logo" width="200" height="auto"/>
 
