@@ -17,15 +17,10 @@ public class GerenciarEmprestimos {
             return;
         }
 
-        System.out.print("ISBN do Livro: ");
-        int isbn = scanner.nextInt();
-        scanner.nextLine();
+        int isbn = LeituraDeDados.lerInteiro("ISBN do Livro: ");
+        int id = LeituraDeDados.lerInteiro("ID do Membro: ");
 
-        System.out.print("ID do Membro: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-
-        biblioteca.registroEmprestimo(isbn, id);
+        biblioteca.registrarNovoEmprestimo(isbn, id);
     }
 
     public void devolverLivro() {
@@ -35,18 +30,13 @@ public class GerenciarEmprestimos {
             return;
         }
 
-        System.out.print("ISBN do Livro: ");
-        int isbn = scanner.nextInt();
-        scanner.nextLine();
+        int isbn = LeituraDeDados.lerInteiro("ISBN do Livro: ");
+        int id = LeituraDeDados.lerInteiro("ID do Membro: ");
 
-        System.out.print("ID do Membro: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-
-        biblioteca.devolucaoLivro(isbn, id);
+        biblioteca.devolverLivroBiblioteca(isbn, id);
     }
 
     public void listarEmprestimos() {
-        biblioteca.listagemEmprestimos();
+        biblioteca.listarTodosEmprestimos();
     }
 }

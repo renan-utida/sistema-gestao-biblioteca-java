@@ -1,9 +1,5 @@
-Livro: {titulo=A, autor=A, ISBN=1}
-Livro: {titulo=B, autor=B, ISBN=2}
-Livro: {titulo=C, autor=C, ISBN=3}
-Livro: {titulo=G, autor=G, ISBN=15}
-Membro: {nome=d, id=4, email=wi@em.com}
-Membro: {nome=e, id=5, email=e@mail.com}
-Membro: {nome=Te, id=16, email=te@kasil.com}
-Emprestimo: {livro=A, membro=d, data=Sat Mar 01 17:37:49 GMT-03:00 2025}
-Emprestimo: {livro=C, membro=Te, data=Sat Mar 01 17:39:00 GMT-03:00 2025}
+Livro: {titulo=Pinoquio, autor=Gepeto, ISBN=123}
+Livro: {titulo=Titanic, autor=Jack, ISBN=321}
+Livro: {titulo=a, autor=a, ISBN=1}
+Membro: {nome=Renan, id=741, email=renan@email.com}
+Membro: {nome=Pedro, id=147, email=pedro@email.com}

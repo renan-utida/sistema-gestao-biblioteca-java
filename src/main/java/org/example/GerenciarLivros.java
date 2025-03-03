@@ -25,9 +25,7 @@ public class GerenciarLivros {
             throw new IllegalArgumentException("Autor deve conter apenas letras e espaços.");
         }
 
-        System.out.print("ISBN: ");
-        int isbn = scanner.nextInt();
-        scanner.nextLine();
+        int isbn = LeituraDeDados.lerInteiro("ISBN: ");
 
         if (biblioteca.existeLivro(isbn)) {
             System.out.println("Erro: Já existe um livro com esse ISBN.");
@@ -35,7 +33,7 @@ public class GerenciarLivros {
         }
 
         Livro livro = new Livro(titulo, autor, isbn);
-        biblioteca.novoLivro(livro);
+        biblioteca.adicionarNovoLivro(livro);
     }
 
     public void removerLivro() {
@@ -43,13 +41,13 @@ public class GerenciarLivros {
         if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "Nenhum livro registrado no sistema.")) {
             return;
         }
-        System.out.print("ISBN do livro para remover: ");
-        int isbn = scanner.nextInt();
-        scanner.nextLine();
-        biblioteca.remocaoLivro(isbn);
+
+        int isbn = LeituraDeDados.lerInteiro("ISBN do livro para remover: ");
+
+        biblioteca.removerLivroBiblioteca(isbn);
     }
 
     public void listarLivros() {
-        biblioteca.listagemLivros();
+        biblioteca.listarTodosLivros();
     }
 }

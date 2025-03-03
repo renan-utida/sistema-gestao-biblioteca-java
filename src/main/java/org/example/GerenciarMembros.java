@@ -19,9 +19,7 @@ public class GerenciarMembros {
             throw new IllegalArgumentException("Nome deve conter apenas letras e espaços.");
         }
 
-        System.out.print("ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
+        int id = LeituraDeDados.lerInteiro("ID: ");
 
         if (biblioteca.existeMembro(id)) {
             System.out.println("Erro: Já existe um membro com esse ID.");
@@ -37,10 +35,10 @@ public class GerenciarMembros {
         }
 
         Membro membro = new Membro(nome, id, email);
-        biblioteca.registroMembro(membro);
+        biblioteca.registrarNovoMembro(membro);
     }
 
     public void listarMembros() {
-        biblioteca.listagemMembros();
+        biblioteca.listarTodosMembros();
     }
 }
