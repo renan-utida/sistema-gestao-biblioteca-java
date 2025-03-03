@@ -3,13 +3,21 @@ package org.example;
 import java.util.*;
 
 public class Principal {
-    private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner;
     private static Biblioteca biblioteca = new Biblioteca();
-    private static GerenciarLivros gerenciarLivros = new GerenciarLivros(biblioteca);
-    private static GerenciarMembros gerenciarMembros = new GerenciarMembros(biblioteca);
-    private static GerenciarEmprestimos gerenciarEmprestimos = new GerenciarEmprestimos(biblioteca);
+    private static GerenciarLivros gerenciarLivros;
+    private static GerenciarMembros gerenciarMembros;
+    private static GerenciarEmprestimos gerenciarEmprestimos;
+
+    public Principal() {
+        this.scanner = new Scanner(System.in);
+        this.gerenciarLivros = new GerenciarLivros(biblioteca, scanner);
+        this.gerenciarMembros = new GerenciarMembros(biblioteca, scanner);
+        this.gerenciarEmprestimos = new GerenciarEmprestimos(biblioteca, scanner);
+    }
 
     public static void main(String[] args) {
+        Principal principal = new Principal();
         System.out.println("Seja bem-vindo ao sistema de gestão de biblioteca!");
         while (true) {
             try {
@@ -28,6 +36,7 @@ public class Principal {
                     case 3 -> gerenciarEmprestimos();
                     case 4 -> {
                         System.out.println("\nSistema encerrado. Obrigado por visitar a nossa biblioteca!");
+                        principal.closeScanner();
                         return;
                     }
                     default -> System.out.println("Opção inválida! Digite um número de 1 a 4.");
@@ -130,6 +139,12 @@ public class Principal {
                 System.out.println("Erro inesperado: " + e.getMessage());
                 scanner.nextLine();
             }
+        }
+    }
+
+    private void closeScanner() {
+        if (scanner != null){
+            scanner.close();
         }
     }
 }

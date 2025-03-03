@@ -4,33 +4,40 @@ import java.util.Scanner;
 
 public class GerenciarEmprestimos {
     private Biblioteca biblioteca;
+    private Scanner scanner;
 
-    public GerenciarEmprestimos(Biblioteca biblioteca) {
+    public GerenciarEmprestimos(Biblioteca biblioteca, Scanner scanner) {
         this.biblioteca = biblioteca;
+        this.scanner = scanner;
     }
 
     public void registrarEmprestimo() {
-        Scanner scanner = new Scanner(System.in);
-
         if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "Nenhum livro registrado no sistema.") ||
                 biblioteca.exibirMensagemSeListaVazia(biblioteca.getMembros(), "Nenhum membro registrado no sistema.")) {
             return;
         }
 
-        int isbn = LeituraDeDados.lerInteiro("ISBN do Livro: ");
+        System.out.println("\nLivros cadastrados:");
+        biblioteca.listarTodosLivros();
+
+        System.out.println("\nMembros cadastrados:");
+        biblioteca.listarTodosMembros();
+
+        int isbn = LeituraDeDados.lerInteiro("\nISBN do Livro: ");
         int id = LeituraDeDados.lerInteiro("ID do Membro: ");
 
         biblioteca.registrarNovoEmprestimo(isbn, id);
     }
 
     public void devolverLivro() {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nEmpréstimos ativos:");
+        biblioteca.listarTodosEmprestimos();
 
-        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getEmprestimos(), "Nenhum empréstimo registrado no sistema.")) {
+        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getEmprestimos(), "\nNenhum empréstimo registrado no sistema.")) {
             return;
         }
 
-        int isbn = LeituraDeDados.lerInteiro("ISBN do Livro: ");
+        int isbn = LeituraDeDados.lerInteiro("\nISBN do Livro: ");
         int id = LeituraDeDados.lerInteiro("ID do Membro: ");
 
         biblioteca.devolverLivroBiblioteca(isbn, id);

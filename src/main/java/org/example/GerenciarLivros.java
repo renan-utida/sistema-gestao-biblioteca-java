@@ -4,13 +4,14 @@ import java.util.*;
 
 public class GerenciarLivros {
     private Biblioteca biblioteca;
+    private Scanner scanner;
 
-    public GerenciarLivros(Biblioteca biblioteca) {
+    public GerenciarLivros(Biblioteca biblioteca, Scanner scanner) {
         this.biblioteca = biblioteca;
+        this.scanner = scanner;
     }
 
     public void adicionarLivro() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Título: ");
         String titulo = scanner.nextLine();
         if (titulo.trim().isEmpty()) {
@@ -37,12 +38,14 @@ public class GerenciarLivros {
     }
 
     public void removerLivro() {
-        Scanner scanner = new Scanner(System.in);
-        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "Nenhum livro registrado no sistema.")) {
+        System.out.println("\nLivros cadastrados:");
+        biblioteca.listarTodosLivros();
+
+        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getLivros(), "\nNenhum livro registrado no sistema.")) {
             return;
         }
 
-        int isbn = LeituraDeDados.lerInteiro("ISBN do livro para remover: ");
+        int isbn = LeituraDeDados.lerInteiro("\nISBN do livro para remover: ");
 
         biblioteca.removerLivroBiblioteca(isbn);
     }

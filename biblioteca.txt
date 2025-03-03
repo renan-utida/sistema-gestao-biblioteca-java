@@ -1,5 +1,8 @@
-Livro: {titulo=Pinoquio, autor=Gepeto, ISBN=123}
-Livro: {titulo=Titanic, autor=Jack, ISBN=321}
-Livro: {titulo=a, autor=a, ISBN=1}
+Livro: {titulo=Titanic, autor=Jack, ISBN=123}
+Livro: {titulo=Vingadores, autor=Marvel, ISBN=321}
+Livro: {titulo=A, autor=A, ISBN=1}
 Membro: {nome=Renan, id=741, email=renan@email.com}
 Membro: {nome=Pedro, id=147, email=pedro@email.com}
+Membro: {nome=Lucas, id=852, email=lucas@email.com}
+Emprestimo: {livro=Titanic, membro=Pedro, data=Mon Mar 03 14:24:52 GMT-03:00 2025}
+Emprestimo: {livro=Vingadores, membro=Lucas, data=Mon Mar 03 14:24:52 GMT-03:00 2025}

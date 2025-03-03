@@ -76,6 +76,14 @@ public class Biblioteca {
         Membro membro = membros.stream().filter(m -> m.getId() == membroId).findFirst().orElse(null);
 
         if (livro != null && membro != null) {
+            boolean emprestimoAtivo = emprestimos.stream()
+                    .anyMatch(e -> e.getLivro().getIsbn() == isbn && e.getMembro().getId() == membroId);
+
+            if (emprestimoAtivo) {
+                System.out.println("Erro: O membro já possui um empréstimo ativo para este livro.");
+                return;
+            }
+
             emprestimos.add(new Emprestimo(livro, membro, new Date()));
             salvarDados.salvar(livros, membros, emprestimos);
             System.out.println("Empréstimo registrado com sucesso!");

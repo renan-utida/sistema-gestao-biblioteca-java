@@ -11,9 +11,9 @@ public class LeituraDeDados {
                 System.out.print(mensagem);
                 return scanner.nextInt();
             } catch (Exception e) {
-                System.out.println("Erro: Digite um número válido.\n");
+                System.out.println("Erro: Digite um número válido.");
             } finally {
-                scanner.nextLine(); // Limpa o buffer do Scanner
+                scanner.nextLine();
             }
         }
     }

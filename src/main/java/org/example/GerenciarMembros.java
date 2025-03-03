@@ -4,13 +4,14 @@ import java.util.Scanner;
 
 public class GerenciarMembros {
     private Biblioteca biblioteca;
+    private Scanner scanner;
 
-    public GerenciarMembros(Biblioteca biblioteca) {
+    public GerenciarMembros(Biblioteca biblioteca, Scanner scanner) {
         this.biblioteca = biblioteca;
+        this.scanner = scanner;
     }
 
     public void registrarMembro() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
         if (nome.trim().isEmpty()) {
