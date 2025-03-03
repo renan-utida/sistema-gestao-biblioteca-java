@@ -5,7 +5,7 @@ Este é um sistema de gestão de biblioteca desenvolvido em Java como parte de u
 ## Tecnologia Utilizada
 - Java
 
-<img src="https://github.com/user-attachments/assets/fc2e0fc7-e5d9-40a9-8681-9f0c09c23705" alt="java-logo" width="40" height="auto"/>
+<img src="https://github.com/user-attachments/assets/fc2e0fc7-e5d9-40a9-8681-9f0c09c23705" alt="java-logo" width="200" height="auto"/>
 
 ## Funcionalidades
 
