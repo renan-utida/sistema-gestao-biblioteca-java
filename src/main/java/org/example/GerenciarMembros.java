@@ -12,7 +12,9 @@ public class GerenciarMembros {
     }
 
     public void registrarMembro() {
-        System.out.print("Nome: ");
+        biblioteca.exibirIDsCadastrados();
+
+        System.out.print("\nNome: ");
         String nome = scanner.nextLine();
         if (nome.trim().isEmpty()) {
             throw new IllegalArgumentException("Nome não pode ser vazio.");
@@ -21,6 +23,9 @@ public class GerenciarMembros {
         }
 
         int id = LeituraDeDados.lerInteiro("ID: ");
+        if (id == -1) {
+            return;
+        }
 
         if (biblioteca.existeMembro(id)) {
             System.out.println("Erro: Já existe um membro com esse ID.");
@@ -37,6 +42,22 @@ public class GerenciarMembros {
 
         Membro membro = new Membro(nome, id, email);
         biblioteca.registrarNovoMembro(membro);
+    }
+
+    public void removerMembro() {
+        if (biblioteca.getMembros().isEmpty()) {
+            System.out.println("\nNenhum membro registrado no sistema.");
+            return;
+        }
+
+        biblioteca.listarTodosMembros();
+
+        int id = LeituraDeDados.lerInteiro("\nID do membro para remover: ");
+        if (id == -1) {
+            return;
+        }
+
+        biblioteca.removerMembro(id);
     }
 
     public void listarMembros() {

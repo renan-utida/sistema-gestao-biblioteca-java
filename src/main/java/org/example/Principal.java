@@ -54,10 +54,11 @@ public class Principal {
     private static void gerenciarLivros() {
         while (true) {
             try{
-                System.out.println("\n1 - Adicionar Livro");
+                System.out.println("\n1 - Registrar Livro");
                 System.out.println("2 - Remover Livro");
-                System.out.println("3 - Listar Livros");
-                System.out.println("4 - Voltar");
+                System.out.println("3 - Editar Livro");
+                System.out.println("4 - Listar Livros");
+                System.out.println("5 - Voltar");
                 System.out.print("Escolha: ");
 
                 int opcao = scanner.nextInt();
@@ -66,9 +67,10 @@ public class Principal {
                 switch (opcao) {
                     case 1 -> gerenciarLivros.adicionarLivro();
                     case 2 -> gerenciarLivros.removerLivro();
-                    case 3 -> gerenciarLivros.listarLivros();
-                    case 4 -> { return; }
-                    default -> System.out.println("Opção inválida! Digite um número de 1 a 4.");
+                    case 3 -> gerenciarLivros.editarLivro();
+                    case 4 -> gerenciarLivros.listarLivros();
+                    case 5 -> { return; }
+                    default -> System.out.println("Opção inválida! Digite um número de 1 a 5.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Erro: Digite um número válido.");
@@ -86,8 +88,9 @@ public class Principal {
         while (true) {
             try{
                 System.out.println("\n1 - Registrar Membro");
-                System.out.println("2 - Listar Membros");
-                System.out.println("3 - Voltar");
+                System.out.println("2 - Remover Membro");
+                System.out.println("3 - Listar Membros");
+                System.out.println("4 - Voltar");
                 System.out.print("Escolha: ");
 
                 int opcao = scanner.nextInt();
@@ -95,9 +98,10 @@ public class Principal {
 
                 switch (opcao) {
                     case 1 -> gerenciarMembros.registrarMembro();
-                    case 2 -> gerenciarMembros.listarMembros();
-                    case 3 -> { return; }
-                    default -> System.out.println("Opção inválida! Digite um número de 1 a 3.");
+                    case 2 -> gerenciarMembros.removerMembro();
+                    case 3 -> gerenciarMembros.listarMembros();
+                    case 4 -> { return; }
+                    default -> System.out.println("Opção inválida! Digite um número de 1 a 4.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Erro: Digite um número válido.");

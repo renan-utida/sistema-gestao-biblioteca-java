@@ -9,11 +9,19 @@ public class LeituraDeDados {
         while (true) {
             try {
                 System.out.print(mensagem);
-                return scanner.nextInt();
+                int valor = scanner.nextInt();
+                scanner.nextLine();
+
+                if (valor <= 0) {
+                    System.out.println("Erro: O valor deve ser maior que zero.");
+                    return -1;
+                }
+
+                return valor;
             } catch (Exception e) {
                 System.out.println("Erro: Digite um número válido.");
-            } finally {
                 scanner.nextLine();
+                return -1;
             }
         }
     }
