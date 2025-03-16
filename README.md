@@ -13,10 +13,12 @@ O sistema oferece as seguintes funcionalidades:
 1. **Gerenciamento de Livros:**
    - Adicionar um novo livro.
    - Remover um livro existente.
+   - Editar um livro existente.
    - Listar todos os livros cadastrados.
 
 2. **Gerenciamento de Membros:**
    - Registrar um novo membro.
+   - Remover um membro cadastrado.
    - Listar todos os membros cadastrados.
 
 3. **Gerenciamento de Empréstimos:**
