@@ -119,23 +119,21 @@ public class Biblioteca {
         }
     }
 
-    public void devolverLivroBiblioteca(int isbn, int membroId) {
+    public void devolverLivroBiblioteca(int numeroEmprestimo) {
         if (emprestimos.isEmpty()) {
             System.out.println("Nenhum empréstimo registrado no sistema.");
             return;
         }
 
-        Optional<Emprestimo> emprestimo = emprestimos.stream()
-                .filter(e -> e.getLivro().getIsbn() == isbn && e.getMembro().getId() == membroId)
-                .findFirst();
-
-        if (emprestimo.isPresent()) {
-            emprestimos.remove(emprestimo.get());
-            salvarDados.salvar(livros, membros, emprestimos);
-            System.out.println("Livro devolvido com sucesso!");
-        } else {
-            System.out.println("Erro: Nenhum empréstimo encontrado para este livro e usuário.");
+        if (numeroEmprestimo < 1 || numeroEmprestimo > emprestimos.size()) {
+            System.out.println("Erro: Número de empréstimo inválido.");
+            return;
         }
+
+        Emprestimo emprestimo = emprestimos.get(numeroEmprestimo - 1);
+        emprestimos.remove(emprestimo);
+        salvarDados.salvar(livros, membros, emprestimos);
+        System.out.println("Livro devolvido com sucesso!");
     }
 
 
@@ -174,8 +172,20 @@ public class Biblioteca {
     }
 
     public void listarTodosEmprestimos() {
-        if (exibirMensagemSeListaVazia(emprestimos, "Nenhum empréstimo registrado.")) return;
-        emprestimos.forEach(System.out::println);
+        if (emprestimos.isEmpty()) {
+            System.out.println("\nNenhum empréstimo registrado.");
+            return;
+        }
+
+        System.out.println("\nEmpréstimos ativos:");
+        for (int i = 0; i < emprestimos.size(); i++) {
+            Emprestimo emprestimo = emprestimos.get(i);
+            System.out.println("-> Empréstimo " + (i + 1));
+            System.out.println("   - Livro: " + emprestimo.getLivro().getTitulo() + ", " + emprestimo.getLivro().getAutor() + " - ISBN = " + emprestimo.getLivro().getIsbn());
+            System.out.println("   - Membro: " + emprestimo.getMembro().getNome() + ", " + emprestimo.getMembro().getEmail() + " - ID = " + emprestimo.getMembro().getId());
+            System.out.println("   - Data de Empréstimo: " + emprestimo.getDataEmprestimo());
+            System.out.println();
+        }
     }
 
     public void exibirISBNsCadastrados() {

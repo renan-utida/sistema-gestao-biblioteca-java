@@ -17,30 +17,40 @@ public class GerenciarEmprestimos {
             return;
         }
 
-        System.out.println("\nLivros cadastrados:");
         biblioteca.listarTodosLivros();
-
-        System.out.println("\nMembros cadastrados:");
-        biblioteca.listarTodosMembros();
-
+        biblioteca.exibirISBNsCadastrados();
         int isbn = LeituraDeDados.lerInteiro("\nISBN do Livro: ");
-        int id = LeituraDeDados.lerInteiro("ID do Membro: ");
+        if (isbn == -1 || !biblioteca.existeLivro(isbn)) {
+            System.out.println("Erro: ISBN inválido ou livro não encontrado.");
+            return;
+        }
+
+        biblioteca.listarTodosMembros();
+        biblioteca.exibirIDsCadastrados();
+        int id = LeituraDeDados.lerInteiro("\nID do Membro: ");
+        if (id == -1 || !biblioteca.existeMembro(id)) {
+            System.out.println("Erro: ID inválido ou membro não encontrado.");
+            return;
+        }
 
         biblioteca.registrarNovoEmprestimo(isbn, id);
     }
 
     public void devolverLivro() {
-        System.out.println("\nEmpréstimos ativos:");
-        biblioteca.listarTodosEmprestimos();
-
-        if (biblioteca.exibirMensagemSeListaVazia(biblioteca.getEmprestimos(), "\nNenhum empréstimo registrado no sistema.")) {
+        if (biblioteca.getEmprestimos().isEmpty()) {
+            System.out.println("\nNenhum empréstimo registrado no sistema.");
             return;
         }
 
-        int isbn = LeituraDeDados.lerInteiro("\nISBN do Livro: ");
-        int id = LeituraDeDados.lerInteiro("ID do Membro: ");
+        System.out.println("\nEmpréstimos ativos:");
+        biblioteca.listarTodosEmprestimos();
 
-        biblioteca.devolverLivroBiblioteca(isbn, id);
+        int numeroEmprestimo = LeituraDeDados.lerInteiro("\nNúmero do empréstimo para devolver: ");
+        if (numeroEmprestimo == -1) {
+            return;
+        }
+
+        biblioteca.devolverLivroBiblioteca(numeroEmprestimo);
     }
 
     public void listarEmprestimos() {

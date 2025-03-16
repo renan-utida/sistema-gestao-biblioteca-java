@@ -6,3 +6,5 @@ Membro: {nome=Pedro, id=1, email=pe@email.com}
 Membro: {nome=Kaio, id=500, email=kaio@gmail.com}
 Membro: {nome=Jorge, id=200, email=jorge@email.com}
 Membro: {nome=Antonio, id=150, email=ant@email.com}
+Emprestimo: {livro=João Pé de Feijão, membro=Pedro, data=Sun Mar 16 00:31:36 GMT-03:00 2025}
+Emprestimo: {livro=Titanic, membro=Kaio, data=Sun Mar 16 00:32:10 GMT-03:00 2025}
