@@ -28,7 +28,6 @@ public class CarregarDados {
                     String nomeMembro = partes[1].split("=")[1];
                     String data = partes[2].split("=")[1].replace("}", "");
 
-                    // Encontrar o Livro e o Membro correspondentes
                     Livro livro = livros.stream().filter(l -> l.getTitulo().equals(tituloLivro)).findFirst().orElse(null);
                     Membro membro = membros.stream().filter(m -> m.getNome().equals(nomeMembro)).findFirst().orElse(null);
 

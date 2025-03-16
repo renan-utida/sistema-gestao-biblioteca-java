@@ -20,7 +20,11 @@ public class GerenciarEmprestimos {
         biblioteca.listarTodosLivros();
         biblioteca.exibirISBNsCadastrados();
         int isbn = LeituraDeDados.lerInteiro("\nISBN do Livro: ");
-        if (isbn == -1 || !biblioteca.existeLivro(isbn)) {
+        if (isbn == -1) {
+            return;
+        }
+
+        if (!biblioteca.existeLivro(isbn)) {
             System.out.println("Erro: ISBN inválido ou livro não encontrado.");
             return;
         }
@@ -28,7 +32,11 @@ public class GerenciarEmprestimos {
         biblioteca.listarTodosMembros();
         biblioteca.exibirIDsCadastrados();
         int id = LeituraDeDados.lerInteiro("\nID do Membro: ");
-        if (id == -1 || !biblioteca.existeMembro(id)) {
+        if (id == -1) {
+            return;
+        }
+
+        if (!biblioteca.existeMembro(id)) {
             System.out.println("Erro: ID inválido ou membro não encontrado.");
             return;
         }

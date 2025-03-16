@@ -1,10 +1,16 @@
+---------------- Livros ----------------
 Livro: {titulo=João Pé de Feijão, autor=Jack, ISBN=1}
 Livro: {titulo=Titanic, autor=Jorge, ISBN=2}
 Livro: {titulo=Karate Kid, autor=Michael, ISBN=4}
 Livro: {titulo=Panico, autor=Henry, ISBN=5}
+Livro: {titulo=O Pirata Maluco, autor=Jack Sparrow, ISBN=10}
+
+---------------- Membros ----------------
 Membro: {nome=Pedro, id=1, email=pe@email.com}
 Membro: {nome=Kaio, id=500, email=kaio@gmail.com}
 Membro: {nome=Jorge, id=200, email=jorge@email.com}
 Membro: {nome=Antonio, id=150, email=ant@email.com}
-Emprestimo: {livro=João Pé de Feijão, membro=Pedro, data=Sun Mar 16 00:31:36 GMT-03:00 2025}
-Emprestimo: {livro=Titanic, membro=Kaio, data=Sun Mar 16 00:32:10 GMT-03:00 2025}
+
+---------------- Empréstimos ----------------
+Emprestimo: {livro=João Pé de Feijão, membro=Pedro, data=Sun Mar 16 00:56:23 GMT-03:00 2025}
+Emprestimo: {livro=Titanic, membro=Kaio, data=Sun Mar 16 00:56:23 GMT-03:00 2025}
